@@ -1,2 +1,4 @@
 /receiver
 /streamer
+*.a
+*.o
