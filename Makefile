@@ -4,8 +4,13 @@ CFLAGS += -I$(shell pwd)/ -I./live555/BasicUsageEnvironment/include -I./live555/
 LDFLAGS := -lssl -lcrypto
 LIVE555_LIB := ./live555/liveMedia/libliveMedia.a ./live555/groupsock/libgroupsock.a ./live555/BasicUsageEnvironment/libBasicUsageEnvironment.a ./live555/UsageEnvironment/libUsageEnvironment.a
 
-all:streamer receiver
+all : live555 streamer receiver 
 
+live555: FORCE
+	cd live555/ && ./genMakefiles linux && make -j16
+
+FORCE:
+	
 streamer:
 	g++ -o streamer -L. streamer.cpp $(LIVE555_LIB) $(LDFLAGS) $(CFLAGS)
 
